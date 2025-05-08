@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import DashboardLayout from '@/components/layout/DashboardLayout';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Search, Phone, MessageSquare } from 'lucide-react';
@@ -95,7 +94,7 @@ const Quotes = () => {
     quote.customerName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Function to render the selected quote details
+  // Selected quote (default to first quote)
   const [selectedQuote, setSelectedQuote] = useState<Quote | null>(mockQuotes[0]);
 
   return (
@@ -113,118 +112,114 @@ const Quotes = () => {
           />
         </div>
         
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
-          {/* Quotes List - Takes up full width on mobile, 5/12 on desktop */}
-          <div className="md:col-span-5 space-y-6">
+        <div className="flex flex-col gap-6">
+          {/* Quote Details - Now on top */}
+          {selectedQuote && (
             <Card className="bg-white border-0 shadow-sm">
-              <CardContent className="p-0">
-                <div className="max-h-[calc(100vh-220px)] overflow-y-auto">
-                  {filteredQuotes.map(quote => (
-                    <div 
-                      key={quote.id}
-                      onClick={() => setSelectedQuote(quote)}
-                      className={`p-4 border-b cursor-pointer transition-colors ${selectedQuote?.id === quote.id ? 'bg-gray-50' : 'hover:bg-gray-50'}`}
-                    >
-                      <div className="flex justify-between">
-                        <h3 className="font-medium">{quote.customerName}</h3>
-                        <span className="text-sm text-gray-500">{quote.dateFormatted.split(' at')[0]}</span>
-                      </div>
-                    </div>
-                  ))}
+              <CardHeader className="pb-2">
+                <div className="flex justify-between items-center">
+                  <CardTitle>{selectedQuote.customerName}</CardTitle>
+                  <span className="text-sm text-gray-500">{selectedQuote.dateFormatted}</span>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Project Details */}
+                {selectedQuote.projectDetails && (
+                  <div>
+                    <h3 className="font-semibold text-sm text-gray-700 mb-1">Project Details</h3>
+                    <p>{selectedQuote.projectDetails}</p>
+                  </div>
+                )}
+                
+                {/* Home Specifications */}
+                {selectedQuote.homeSpecifications && (
+                  <div>
+                    <h3 className="font-semibold text-sm text-gray-700 mb-1">Home Specifications</h3>
+                    <ul className="space-y-1">
+                      {selectedQuote.homeSpecifications.sqFt && (
+                        <li className="flex items-center gap-2">
+                          <span className="text-sm">{selectedQuote.homeSpecifications.sqFt} sq ft</span>
+                        </li>
+                      )}
+                      {selectedQuote.homeSpecifications.bedrooms && (
+                        <li className="flex items-center gap-2">
+                          <span className="text-sm">{selectedQuote.homeSpecifications.bedrooms} Bedrooms</span>
+                        </li>
+                      )}
+                      {selectedQuote.homeSpecifications.bathrooms && (
+                        <li className="flex items-center gap-2">
+                          <span className="text-sm">{selectedQuote.homeSpecifications.bathrooms} Bathrooms</span>
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                )}
+                
+                {/* Urgency */}
+                {selectedQuote.urgency && (
+                  <div>
+                    <h3 className="font-semibold text-sm text-gray-700 mb-1">Urgency</h3>
+                    <p>{selectedQuote.urgency}</p>
+                  </div>
+                )}
+                
+                {/* Services Needed */}
+                {selectedQuote.services && selectedQuote.services.length > 0 && (
+                  <div>
+                    <h3 className="font-semibold text-sm text-gray-700 mb-1">Services Needed</h3>
+                    <ul className="space-y-1">
+                      {selectedQuote.services.map((service, index) => (
+                        <li key={index} className="text-sm">{service}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                
+                {/* Customer Address */}
+                {selectedQuote.address && (
+                  <div>
+                    <h3 className="font-semibold text-sm text-gray-700 mb-1">Customer Address</h3>
+                    <p className="text-sm">{selectedQuote.address}</p>
+                  </div>
+                )}
+                
+                {/* Actions */}
+                <div>
+                  <h3 className="font-semibold text-sm text-gray-700 mb-2">Actions</h3>
+                  <div className="flex gap-2">
+                    <Button size="sm" variant="outline" className="gap-2">
+                      <Phone size={16} />
+                      Call
+                    </Button>
+                    <Button size="sm" variant="outline" className="gap-2">
+                      <MessageSquare size={16} />
+                      Chat
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
-          </div>
-          
-          {/* Quote Details - Takes up full width on mobile, 7/12 on desktop */}
-          <div className="md:col-span-7">
-            {selectedQuote && (
-              <Card className="bg-white border-0 shadow-sm">
-                <CardHeader className="pb-2">
-                  <div className="flex justify-between items-center">
-                    <CardTitle>{selectedQuote.customerName}</CardTitle>
-                    <span className="text-sm text-gray-500">{selectedQuote.dateFormatted}</span>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  {/* Project Details */}
-                  {selectedQuote.projectDetails && (
-                    <div>
-                      <h3 className="font-semibold text-sm text-gray-700 mb-1">Project Details</h3>
-                      <p>{selectedQuote.projectDetails}</p>
-                    </div>
-                  )}
-                  
-                  {/* Home Specifications */}
-                  {selectedQuote.homeSpecifications && (
-                    <div>
-                      <h3 className="font-semibold text-sm text-gray-700 mb-1">Home Specifications</h3>
-                      <ul className="space-y-1">
-                        {selectedQuote.homeSpecifications.sqFt && (
-                          <li className="flex items-center gap-2">
-                            <span className="text-sm">{selectedQuote.homeSpecifications.sqFt} sq ft</span>
-                          </li>
-                        )}
-                        {selectedQuote.homeSpecifications.bedrooms && (
-                          <li className="flex items-center gap-2">
-                            <span className="text-sm">{selectedQuote.homeSpecifications.bedrooms} Bedrooms</span>
-                          </li>
-                        )}
-                        {selectedQuote.homeSpecifications.bathrooms && (
-                          <li className="flex items-center gap-2">
-                            <span className="text-sm">{selectedQuote.homeSpecifications.bathrooms} Bathrooms</span>
-                          </li>
-                        )}
-                      </ul>
-                    </div>
-                  )}
-                  
-                  {/* Urgency */}
-                  {selectedQuote.urgency && (
-                    <div>
-                      <h3 className="font-semibold text-sm text-gray-700 mb-1">Urgency</h3>
-                      <p>{selectedQuote.urgency}</p>
-                    </div>
-                  )}
-                  
-                  {/* Services Needed */}
-                  {selectedQuote.services && selectedQuote.services.length > 0 && (
-                    <div>
-                      <h3 className="font-semibold text-sm text-gray-700 mb-1">Services Needed</h3>
-                      <ul className="space-y-1">
-                        {selectedQuote.services.map((service, index) => (
-                          <li key={index} className="text-sm">{service}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  
-                  {/* Customer Address */}
-                  {selectedQuote.address && (
-                    <div>
-                      <h3 className="font-semibold text-sm text-gray-700 mb-1">Customer Address</h3>
-                      <p className="text-sm">{selectedQuote.address}</p>
-                    </div>
-                  )}
-                  
-                  {/* Actions */}
-                  <div>
-                    <h3 className="font-semibold text-sm text-gray-700 mb-2">Actions</h3>
-                    <div className="flex gap-2">
-                      <Button size="sm" variant="outline" className="gap-2">
-                        <Phone size={16} />
-                        Call
-                      </Button>
-                      <Button size="sm" variant="outline" className="gap-2">
-                        <MessageSquare size={16} />
-                        Chat
-                      </Button>
+          )}
+
+          {/* Quotes List - Now below */}
+          <Card className="bg-white border-0 shadow-sm">
+            <CardContent className="p-0">
+              <div className="max-h-[400px] overflow-y-auto">
+                {filteredQuotes.map(quote => (
+                  <div 
+                    key={quote.id}
+                    onClick={() => setSelectedQuote(quote)}
+                    className={`p-4 border-b cursor-pointer transition-colors ${selectedQuote?.id === quote.id ? 'bg-gray-50' : 'hover:bg-gray-50'}`}
+                  >
+                    <div className="flex justify-between">
+                      <h3 className="font-medium">{quote.customerName}</h3>
+                      <span className="text-sm text-gray-500">{quote.dateFormatted.split(' at')[0]}</span>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            )}
-          </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </DashboardLayout>

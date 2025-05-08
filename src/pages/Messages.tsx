@@ -49,7 +49,7 @@ const mockMessages: Message[] = [
 ];
 
 const Messages = () => {
-  const [selectedMessage, setSelectedMessage] = React.useState<Message | null>(null);
+  const [selectedMessage, setSelectedMessage] = React.useState<Message | null>(mockMessages[0]);
 
   return (
     <DashboardLayout>
@@ -57,47 +57,9 @@ const Messages = () => {
         <h1 className="text-2xl font-bold">Messages</h1>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-200px)]">
-        {/* Messages list */}
-        <Card className="border border-gray-200 shadow-sm h-full">
-          <CardHeader className="pb-2 border-b">
-            <div className="relative">
-              <Input 
-                placeholder="Search messages..." 
-                className="pl-10"
-              />
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-            </div>
-          </CardHeader>
-          <CardContent className="p-0 overflow-auto h-[calc(100%-70px)]">
-            <div className="divide-y divide-gray-100">
-              {mockMessages.map((message) => (
-                <div 
-                  key={message.id}
-                  onClick={() => setSelectedMessage(message)}
-                  className={`flex items-start p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedMessage?.id === message.id ? 'bg-gray-50' : ''} ${message.unread ? 'font-medium' : ''}`}
-                >
-                  <div className="w-10 h-10 rounded-full bg-mrxp-blue text-white flex items-center justify-center mr-3">
-                    {message.sender.charAt(0)}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex justify-between items-baseline">
-                      <h4 className="font-medium text-gray-800 truncate">{message.sender}</h4>
-                      <span className="text-xs text-gray-500 whitespace-nowrap ml-2">{message.date}</span>
-                    </div>
-                    <p className="text-sm text-gray-600 truncate">{message.content}</p>
-                  </div>
-                  {message.unread && (
-                    <div className="w-2 h-2 rounded-full bg-mrxp-blue ml-2 mt-2"></div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Message content */}
-        <Card className="border border-gray-200 shadow-sm h-full lg:col-span-2">
+      <div className="flex flex-col gap-6">
+        {/* Message content - Now on top */}
+        <Card className="border border-gray-200 shadow-sm">
           {selectedMessage ? (
             <>
               <CardHeader className="border-b pb-4">
@@ -111,7 +73,7 @@ const Messages = () => {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="p-4 h-[calc(100%-180px)] overflow-y-auto">
+              <CardContent className="p-4">
                 <div className="space-y-4">
                   <div className="flex justify-end">
                     <div className="bg-mrxp-blue text-white rounded-lg p-3 max-w-[80%]">
@@ -144,6 +106,44 @@ const Messages = () => {
               <p className="text-center">Select a conversation from the list to view messages</p>
             </div>
           )}
+        </Card>
+
+        {/* Messages list - Now below */}
+        <Card className="border border-gray-200 shadow-sm">
+          <CardHeader className="pb-2 border-b">
+            <div className="relative">
+              <Input 
+                placeholder="Search messages..." 
+                className="pl-10"
+              />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            </div>
+          </CardHeader>
+          <CardContent className="p-0 overflow-auto max-h-[400px]">
+            <div className="divide-y divide-gray-100">
+              {mockMessages.map((message) => (
+                <div 
+                  key={message.id}
+                  onClick={() => setSelectedMessage(message)}
+                  className={`flex items-start p-4 cursor-pointer hover:bg-gray-50 transition-colors ${selectedMessage?.id === message.id ? 'bg-gray-50' : ''} ${message.unread ? 'font-medium' : ''}`}
+                >
+                  <div className="w-10 h-10 rounded-full bg-mrxp-blue text-white flex items-center justify-center mr-3">
+                    {message.sender.charAt(0)}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex justify-between items-baseline">
+                      <h4 className="font-medium text-gray-800 truncate">{message.sender}</h4>
+                      <span className="text-xs text-gray-500 whitespace-nowrap ml-2">{message.date}</span>
+                    </div>
+                    <p className="text-sm text-gray-600 truncate">{message.content}</p>
+                  </div>
+                  {message.unread && (
+                    <div className="w-2 h-2 rounded-full bg-mrxp-blue ml-2 mt-2"></div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </CardContent>
         </Card>
       </div>
     </DashboardLayout>
