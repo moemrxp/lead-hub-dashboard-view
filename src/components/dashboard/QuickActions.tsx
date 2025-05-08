@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Calendar, MessageSquare, Plus, Settings } from 'lucide-react';
+import { MessageSquare, Calendar, Settings, CalendarOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 
@@ -10,20 +10,39 @@ type ActionButtonProps = {
   label: string;
   to: string;
   className?: string;
+  disabled?: boolean;
 }
 
-const ActionButton = ({ icon: Icon, label, to, className }: ActionButtonProps) => (
-  <Link 
-    to={to} 
-    className={cn(
-      "flex flex-1 flex-col items-center justify-center p-4 text-gray-700 hover:bg-gray-50 rounded-md transition-colors",
-      className
-    )}
-  >
-    <Icon className="h-6 w-6 mb-2" />
-    <span className="text-sm">{label}</span>
-  </Link>
-);
+const ActionButton = ({ icon: Icon, label, to, className, disabled = false }: ActionButtonProps) => {
+  const baseClass = "flex flex-1 flex-col items-center justify-center p-4 rounded-md transition-colors";
+  
+  if (disabled) {
+    return (
+      <div className={cn(
+        baseClass,
+        "text-neutral-400 cursor-not-allowed",
+        className
+      )}>
+        <Icon className="h-6 w-6 mb-2" />
+        <span className="text-sm">{label}</span>
+      </div>
+    );
+  }
+  
+  return (
+    <Link 
+      to={to} 
+      className={cn(
+        baseClass,
+        "text-gray-700 hover:bg-gray-50",
+        className
+      )}
+    >
+      <Icon className="h-6 w-6 mb-2" />
+      <span className="text-sm">{label}</span>
+    </Link>
+  );
+};
 
 export const QuickActions = () => {
   return (
@@ -34,9 +53,10 @@ export const QuickActions = () => {
       <CardContent>
         <div className="grid grid-cols-2 gap-4">
           <ActionButton 
-            icon={Plus} 
-            label="New Invoice" 
-            to="/invoice/new"
+            icon={CalendarOff} 
+            label="Schedule" 
+            to="/calendar"
+            disabled={true}
           />
           <ActionButton 
             icon={MessageSquare} 
@@ -45,7 +65,7 @@ export const QuickActions = () => {
           />
           <ActionButton 
             icon={Calendar} 
-            label="Schedule" 
+            label="Calendar" 
             to="/calendar"
           />
           <ActionButton 
