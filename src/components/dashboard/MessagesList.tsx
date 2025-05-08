@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 type Message = {
@@ -27,20 +28,23 @@ export const MessagesList = ({ messages }: MessagesListProps) => {
             </div>
           ) : (
             messages.map((message) => (
-              <div 
+              <Link 
                 key={message.id}
-                className="flex items-center justify-between px-6 py-3 hover:bg-gray-50 transition-colors"
+                to={`/messages/${message.id}`}
+                className="block"
               >
-                <div className="flex-1">
-                  <h4 className="font-medium text-gray-800">{message.sender}</h4>
-                  <div className="text-sm text-gray-600 truncate max-w-[250px]">
-                    {message.content}
+                <div className="flex items-center justify-between px-6 py-3 hover:bg-gray-50 transition-colors">
+                  <div className="flex-1">
+                    <h4 className="font-medium text-gray-800">{message.sender}</h4>
+                    <div className="text-sm text-gray-600 truncate max-w-[250px]">
+                      {message.content}
+                    </div>
+                  </div>
+                  <div className="text-sm text-gray-500">
+                    {message.date}
                   </div>
                 </div>
-                <div className="text-sm text-gray-500">
-                  {message.date}
-                </div>
-              </div>
+              </Link>
             ))
           )}
         </div>
