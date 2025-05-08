@@ -15,11 +15,6 @@ type Lead = {
   date: string;
   dateFormatted: string;
   projectDetails?: string;
-  homeSpecifications?: {
-    sqFt?: string;
-    bedrooms?: string;
-    bathrooms?: string;
-  };
   urgency?: string;
   services?: string[];
   address?: string;
@@ -36,11 +31,6 @@ const Leads = () => {
       date: '2025-05-07T10:42:00',
       dateFormatted: 'May 7, 2025 at 10:42 PM',
       projectDetails: 'hello',
-      homeSpecifications: {
-        sqFt: 'N/A',
-        bedrooms: 'N/A',
-        bathrooms: 'N/A',
-      },
       urgency: 'ASAP',
       services: ['Plumbing Inspection', 'Plumbing Drain Repair'],
       address: 'Momosa Way, Whiting, New Jersey 08759, United States',
@@ -130,30 +120,6 @@ const Leads = () => {
                   <div>
                     <h3 className="font-semibold text-sm text-gray-700 mb-1">Project Details</h3>
                     <p>{selectedLead.projectDetails}</p>
-                  </div>
-                )}
-                
-                {/* Home Specifications */}
-                {selectedLead.homeSpecifications && (
-                  <div>
-                    <h3 className="font-semibold text-sm text-gray-700 mb-1">Home Specifications</h3>
-                    <ul className="space-y-1">
-                      {selectedLead.homeSpecifications.sqFt && (
-                        <li className="flex items-center gap-2">
-                          <span className="text-sm">{selectedLead.homeSpecifications.sqFt} sq ft</span>
-                        </li>
-                      )}
-                      {selectedLead.homeSpecifications.bedrooms && (
-                        <li className="flex items-center gap-2">
-                          <span className="text-sm">{selectedLead.homeSpecifications.bedrooms} Bedrooms</span>
-                        </li>
-                      )}
-                      {selectedLead.homeSpecifications.bathrooms && (
-                        <li className="flex items-center gap-2">
-                          <span className="text-sm">{selectedLead.homeSpecifications.bathrooms} Bathrooms</span>
-                        </li>
-                      )}
-                    </ul>
                   </div>
                 )}
                 
