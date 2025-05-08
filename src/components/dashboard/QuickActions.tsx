@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { MessageSquare, Calendar, Settings, CalendarOff } from 'lucide-react';
+import { MessageSquare, Settings, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 
@@ -51,22 +51,16 @@ export const QuickActions = () => {
         <CardTitle className="text-lg">Quick Actions</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-2 gap-4">
-          <ActionButton 
-            icon={CalendarOff} 
-            label="Schedule" 
-            to="/calendar"
-            disabled={true}
-          />
+        <div className="grid grid-cols-3 gap-4">
           <ActionButton 
             icon={MessageSquare} 
             label="Messages" 
             to="/messages"
           />
           <ActionButton 
-            icon={Calendar} 
-            label="Calendar" 
-            to="/calendar"
+            icon={Users} 
+            label="Leads" 
+            to="/leads"
           />
           <ActionButton 
             icon={Settings} 
