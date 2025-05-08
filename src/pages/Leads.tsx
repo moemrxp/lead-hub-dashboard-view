@@ -15,11 +15,7 @@ const Leads = () => {
         </div>
         
         <div className="p-6 bg-white rounded-md shadow">
-          <p className="text-gray-500">
-            Your leads will appear here. This section will display potential customers who have shown interest in your services. 
-            You'll be able to track lead status, view contact information, and manage follow-ups all in one place. 
-            When new leads come in, you can prioritize them based on their potential value and likelihood to convert.
-          </p>
+          <p className="text-gray-500">Your leads will appear here.</p>
         </div>
       </div>
     </DashboardLayout>
