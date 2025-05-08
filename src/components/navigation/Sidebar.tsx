@@ -2,12 +2,10 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
-  Calendar,
   MessageSquare, 
   Users, 
   Settings,
   Plus,
-  Calendar as CalendarIcon,
   Menu
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -34,8 +32,7 @@ const Sidebar = ({ className, collapsed = false, toggleSidebar }: SidebarProps) 
   const navItems: NavItem[] = [
     { name: 'Dashboard', href: '/', icon: Users },
     { name: 'Messages', href: '/messages', icon: MessageSquare },
-    { name: 'Quotes', href: '/quotes', icon: Plus },
-    { name: 'Calendar', href: '/calendar', icon: CalendarIcon },
+    { name: 'Leads', href: '/leads', icon: Users },
     { name: 'Settings', href: '/settings', icon: Settings },
   ];
 
