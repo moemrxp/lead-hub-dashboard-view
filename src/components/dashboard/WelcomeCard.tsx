@@ -1,8 +1,9 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Share2 } from 'lucide-react';
 type WelcomeCardProps = {
   name: string;
   profileProgress: number;
@@ -38,6 +39,7 @@ export const WelcomeCard = ({
         </div>
         
         <Button className="w-full text-white bg-green-700 hover:bg-green-600">
+          <Share2 className="mr-2 h-4 w-4" />
           Experience Report
         </Button>
       </CardContent>
