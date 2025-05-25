@@ -9,12 +9,12 @@ type PerformanceOverviewProps = {
 }
 
 const mockData = [
-  { name: 'Jan', leads: 40, messages: 24 },
-  { name: 'Feb', leads: 30, messages: 13 },
-  { name: 'Mar', leads: 45, messages: 22 },
-  { name: 'Apr', leads: 50, messages: 34 },
-  { name: 'May', leads: 65, messages: 40 },
-  { name: 'Jun', leads: 55, messages: 30 },
+  { name: 'Jan', leads: 40, messages: 24, calls: 18 },
+  { name: 'Feb', leads: 30, messages: 13, calls: 22 },
+  { name: 'Mar', leads: 45, messages: 22, calls: 28 },
+  { name: 'Apr', leads: 50, messages: 34, calls: 31 },
+  { name: 'May', leads: 65, messages: 40, calls: 42 },
+  { name: 'Jun', leads: 55, messages: 30, calls: 35 },
 ];
 
 export const PerformanceOverview = ({ loading = false }: PerformanceOverviewProps) => {
@@ -57,6 +57,14 @@ export const PerformanceOverview = ({ loading = false }: PerformanceOverviewProp
                   type="monotone"
                   dataKey="messages"
                   stroke="#78909C"
+                  strokeWidth={2}
+                  activeDot={{ r: 6 }}
+                  dot={false}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="calls"
+                  stroke="#4CAF50"
                   strokeWidth={2}
                   activeDot={{ r: 6 }}
                   dot={false}
