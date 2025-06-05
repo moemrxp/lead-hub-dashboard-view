@@ -8,7 +8,7 @@ const Logo = () => {
       <img 
         src="/lovable-uploads/db93376f-3a60-4953-b2dc-ff80d85e875f.png" 
         alt="mrxp" 
-        className="h-8 w-auto"
+        className="h-12 w-auto"
       />
     </Link>
   );
