@@ -47,31 +47,31 @@ const mockMessages = [
   {
     id: '1',
     sender: 'Kevin',
-    content: 'Hey',
+    content: 'Kitchen renovation estimate',
     date: '03/31'
   },
   {
     id: '2',
     sender: 'Kelly',
-    content: 'heyy whatsup',
+    content: 'Bathroom remodeling quote',
     date: '03/06'
   },
   {
     id: '3',
     sender: 'Waleed',
-    content: 'Hey need some roof work',
+    content: 'Roof repair consultation',
     date: '12/16'
   },
   {
     id: '4',
     sender: 'Moe',
-    content: 'tes',
+    content: 'Plumbing emergency service',
     date: '12/13'
   },
   {
     id: '5',
     sender: 'Sal',
-    content: 'Hey I just you , please call me back!',
+    content: 'Home inspection appointment',
     date: '11/26'
   }
 ];
