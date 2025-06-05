@@ -3,16 +3,19 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { CheckCircle, Share2 } from 'lucide-react';
+import { CheckCircle, Share2, Home } from 'lucide-react';
+
 type WelcomeCardProps = {
   name: string;
   profileProgress: number;
 };
+
 export const WelcomeCard = ({
   name,
   profileProgress
 }: WelcomeCardProps) => {
-  return <Card className="border border-gray-200 shadow-sm">
+  return (
+    <Card className="border border-gray-200 shadow-sm">
       <CardContent className="pt-6">
         <div className="text-xl font-semibold mb-4">Welcome back, {name}</div>
         
@@ -27,7 +30,7 @@ export const WelcomeCard = ({
               </svg>
               
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-base font-medium text-black">mrxp</span>
+                <Home className="w-6 h-6 text-blue-600" />
               </div>
             </div>
           </div>
@@ -43,5 +46,6 @@ export const WelcomeCard = ({
           Experience Report
         </Button>
       </CardContent>
-    </Card>;
+    </Card>
+  );
 };
