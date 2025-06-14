@@ -2,7 +2,6 @@
 import React from 'react';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { WelcomeCard } from '@/components/dashboard/WelcomeCard';
-import { PerformanceOverview } from '@/components/dashboard/PerformanceOverview';
 import { LeadsList } from '@/components/dashboard/LeadsList';
 import { MessagesList } from '@/components/dashboard/MessagesList';
 import { QuickActions } from '@/components/dashboard/QuickActions';
@@ -90,8 +89,6 @@ const Index = () => {
         
         {/* Middle column */}
         <div className="lg:col-span-2 space-y-6">
-          <PerformanceOverview loading={false} />
-          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <LeadsList leads={mockLeads} />
             <MessagesList messages={mockMessages} />
